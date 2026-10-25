@@ -153,7 +153,87 @@
       font-size: .9rem;
     }
 
-    @media (max-width: 600px) {
+    
+    /* Efectos y mejoras visuales */
+    body {
+      background:
+        radial-gradient(ellipse at 15% 5%, rgba(124, 58, 237, 0.13), transparent 40%),
+        #0b0b12;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tag {
+      box-shadow: 0 0 24px rgba(167, 139, 250, 0.12);
+    }
+
+    .btn {
+      transition: transform 0.25s ease, box-shadow 0.25s ease,
+                  background 0.25s ease;
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 8px 30px rgba(167, 139, 250, 0.25);
+    }
+
+    .project {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #a78bfa, #60a5fa);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .project:hover::before {
+      transform: scaleX(1);
+    }
+
+    .skill {
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .skill:hover {
+      transform: translateY(-4px);
+      border-color: #7561ad;
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .hero .tag,
+      .hero h1,
+      .hero p,
+      .hero .buttons {
+        animation: aparecer 0.7s ease both;
+      }
+
+      .hero h1 { animation-delay: 0.1s; }
+      .hero p { animation-delay: 0.2s; }
+      .hero .buttons { animation-delay: 0.3s; }
+
+      @keyframes aparecer {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    }
+
       nav { align-items: flex-start; flex-direction: column; padding: 18px 0; }
       .hero { padding: 70px 0 55px; }
       h1 { letter-spacing: -1px; }
