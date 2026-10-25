@@ -253,6 +253,36 @@
     .project:hover .project-image {
       transform: scale(1.02);
     }
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 20px;
+    }
+
+    .project-tags span {
+      padding: 5px 10px;
+      border: 1px solid #39304f;
+      border-radius: 20px;
+      color: #c4b5fd;
+      background: #211a36;
+      font-size: 0.78rem;
+    }
+
+    .project-link {
+      display: inline-block;
+      padding: 10px 15px;
+      border-radius: 8px;
+      background: #a78bfa;
+      color: #171124;
+      font-weight: bold;
+      transition: transform 0.2s ease;
+    }
+
+    .project-link:hover {
+      transform: translateY(-2px);
+    }
+
 
   </style>
 </head>
@@ -305,19 +335,38 @@
         <p class="section-intro">Algunos de los sitios que estoy construyendo.</p>
 
         <div class="projects">
-          <article class="project">
-            <span class="project-number">PROYECTO 01</span>
-            
-<img
-  class="project-image"
-  src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80"
-  alt="Interior de una barbería moderna"
-  loading="lazy"
->
+          
+<article class="project">
+  <span class="project-number">PROYECTO 01 · WEB COMERCIAL</span>
 
-            <p>Diseño web para una barbería, con servicios, precios y reservas.</p>
-            <a href="https://elteanitomanzanita2013-lang.github.io/urban-cuts-demo/" target="_blank" rel="noopener noreferrer">Ver página ↗</a>
-          </article>
+  <img
+    class="project-image"
+    src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?auto=format&fit=crop&w=900&q=80"
+    alt="Interior de una barbería moderna"
+    loading="lazy"
+  >
+
+  <h3>Urban Cuts</h3>
+
+  <p>
+    Página web para una barbería con diseño elegante,
+    lista de servicios, precios y formulario de reservas.
+  </p>
+
+  <div class="project-tags">
+    <span>HTML</span>
+    <span>CSS</span>
+    <span>Diseño adaptable</span>
+  </div>
+
+  <a
+    class="project-link"
+    href="https://elteanitomanzanita2013-lang.github.io/urban-cuts-demo/"
+    target="_blank"
+    rel="noopener noreferrer"
+  >Visitar proyecto ↗</a>
+</article>
+
 
           <article class="project">
             <span class="project-number">PROYECTO 02</span>
