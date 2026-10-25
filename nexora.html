@@ -1,0 +1,424 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090910">
+<title>NEXORA GAMING | Tu zona gamer</title>
+<style>
+:root {
+  --bg:#090910; --panel:#12121f; --purple:#9b5cff;
+  --cyan:#35e7ff; --text:#f4f2ff; --muted:#a6a3bd;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+}
+a{color:inherit;text-decoration:none}
+button,input{font:inherit}
+button{cursor:pointer}
+.topbar{
+  background:#151020;text-align:center;padding:9px;
+  font-size:12px;color:#d8c5ff;letter-spacing:1px;
+}
+header{
+  position:sticky;top:0;z-index:10;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:20px;padding:17px 6%;
+  background:#090910ed;border-bottom:1px solid #292039;
+  backdrop-filter:blur(15px);
+}
+.logo{font-size:23px;font-weight:900;letter-spacing:1px}
+.logo span{color:var(--purple)}
+nav{display:flex;gap:24px;font-size:14px;color:var(--muted)}
+nav a:hover{color:var(--cyan)}
+.cart-btn,.primary,.secondary{
+  border:0;border-radius:9px;padding:12px 16px;font-weight:bold;
+}
+.cart-btn,.primary{
+  background:linear-gradient(100deg,var(--purple),#7047ff);
+  color:white;box-shadow:0 0 20px #9b5cff24;
+}
+.cart-btn:hover,.primary:hover{filter:brightness(1.2)}
+.hero{
+  min-height:510px;padding:80px 7%;
+  display:grid;grid-template-columns:1.1fr .9fr;
+  align-items:center;gap:35px;overflow:hidden;
+  background:radial-gradient(ellipse at 80% 45%,#49207755,transparent 48%),
+  linear-gradient(130deg,#0c0a17,#10101d 60%,#09151c);
+}
+.eyebrow{color:var(--cyan);font-size:12px;font-weight:bold;letter-spacing:3px}
+h1{font-size:clamp(42px,6vw,72px);line-height:1.02;margin:20px 0}
+h1 span{color:var(--purple);text-shadow:0 0 35px #9b5cff55}
+.hero p,.section-sub{color:var(--muted);line-height:1.8}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.secondary{background:#1c1a2b;color:white;border:1px solid #38304e}
+.hero-art{position:relative;min-height:300px;display:grid;place-items:center}
+.orbit{
+  width:min(330px,75vw);aspect-ratio:1;border:1px solid #9b5cff66;
+  border-radius:50%;display:grid;place-items:center;
+  box-shadow:0 0 70px #8b5cf633,inset 0 0 60px #8b5cf622;
+}
+.gpu{
+  font-size:100px;filter:drop-shadow(0 0 25px #9b5cffaa);
+  animation:float 4s ease-in-out infinite;
+}
+@keyframes float{50%{transform:translateY(-12px)}}
+.stats{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+  padding:25px 7%;border-bottom:1px solid #242034;
+}
+.stat{text-align:center;padding:10px}
+.stat strong{display:block;color:var(--cyan);font-size:20px}
+.stat small{color:var(--muted)}
+section{padding:65px 7%}
+.section-head{
+  display:flex;align-items:end;justify-content:space-between;
+  gap:20px;flex-wrap:wrap;margin-bottom:25px;
+}
+h2{font-size:clamp(27px,4vw,38px);margin:0 0 10px}
+.section-sub{margin:0;font-size:14px}
+.categories{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+.filter{
+  background:#141321;border:1px solid #302941;color:#c9c4dc;
+  border-radius:30px;padding:10px 16px;
+}
+.filter.active,.filter:hover{
+  color:white;border-color:var(--purple);background:#342052;
+}
+.search{
+  width:100%;max-width:340px;background:#13121f;
+  color:white;border:1px solid #302941;border-radius:9px;
+  padding:12px 14px;outline:none;
+}
+.search:focus{border-color:var(--purple)}
+.products{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;
+}
+.product{
+  background:linear-gradient(160deg,#171627,#10101a);
+  border:1px solid #29243a;border-radius:15px;overflow:hidden;
+  transition:transform .2s,border-color .2s;
+}
+.product:hover{transform:translateY(-5px);border-color:var(--purple)}
+.product-visual{
+  height:170px;display:grid;place-items:center;position:relative;
+  background:radial-gradient(ellipse,#4d287a55,transparent 70%),#151321;
+}
+.product-visual img{width:100%;height:100%;object-fit:contain;padding:15px}
+.product-emoji{font-size:68px;filter:drop-shadow(0 0 15px #9b5cff55)}
+.tag{
+  position:absolute;top:12px;left:12px;background:#a855f7;
+  padding:6px 9px;border-radius:5px;font-size:10px;font-weight:bold;
+}
+.product-info{padding:16px}
+.category-name{font-size:10px;color:var(--cyan);letter-spacing:1px}
+.product h3{font-size:16px;min-height:38px;margin:10px 0}
+.description{font-size:12px;color:var(--muted);line-height:1.6;min-height:38px}
+.price-row{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:18px}
+.price{font-size:20px;font-weight:900}
+.add{
+  border:1px solid #7b4bd1;background:#24183b;color:white;
+  border-radius:8px;padding:10px 12px;font-weight:bold;
+}
+.add:hover{background:#7047bb}
+.empty{color:var(--muted);padding:30px 0}
+.promo{
+  background:linear-gradient(110deg,#261444,#141c31);
+  border:1px solid #45305f;border-radius:18px;padding:35px;
+  display:flex;justify-content:space-between;align-items:center;
+  gap:20px;flex-wrap:wrap;
+}
+.promo p{color:var(--muted);line-height:1.7}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.feature{padding:23px;background:var(--panel);border:1px solid #29243a;border-radius:12px}
+.feature b{font-size:17px}
+.feature p{color:var(--muted);font-size:13px;line-height:1.7}
+footer{
+  padding:35px 7%;border-top:1px solid #29243a;
+  color:var(--muted);font-size:13px;display:flex;
+  justify-content:space-between;gap:15px;flex-wrap:wrap;
+}
+.cart-panel{
+  position:fixed;z-index:30;right:0;top:0;height:100%;
+  width:min(410px,100%);padding:24px;background:#11101c;
+  border-left:1px solid #38304b;box-shadow:-20px 0 70px #0009;
+  display:none;overflow:auto;
+}
+.cart-panel.open{display:block}
+.cart-head{display:flex;justify-content:space-between;align-items:center}
+.close{
+  background:#29243a;color:white;border:0;border-radius:8px;
+  padding:10px 13px;
+}
+.cart-item{
+  display:flex;justify-content:space-between;gap:10px;
+  padding:15px 0;border-bottom:1px solid #302941;
+}
+.cart-item small{display:block;color:var(--muted);margin-top:6px}
+.quantity{display:flex;align-items:center;gap:8px;margin-top:8px}
+.quantity button{background:#302442;color:white;border:0;border-radius:5px;padding:4px 9px}
+.cart-total{font-size:22px;font-weight:bold;margin:24px 0}
+.checkout{width:100%}
+.note{font-size:12px;color:var(--muted);line-height:1.6}
+.toast{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  background:#24183b;border:1px solid var(--purple);color:white;
+  padding:13px 18px;border-radius:9px;display:none;z-index:50;
+}
+@media(max-width:950px){
+  .products{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero{grid-template-columns:1fr;padding-top:60px}
+  .hero-art{min-height:230px}
+}
+@media(max-width:600px){
+  header{padding:14px 5%;flex-wrap:wrap}
+  nav{order:3;width:100%;justify-content:space-between;gap:8px;font-size:12px}
+  .logo{font-size:19px}
+  .hero{padding:55px 6%}
+  section{padding:48px 6%}
+  .stats{padding:15px 4%}
+  .stat strong{font-size:16px}
+  .products{gap:10px}
+  .product-visual{height:125px}
+  .product-info{padding:11px}
+  .product h3{font-size:14px}
+  .price{font-size:16px}
+  .add{padding:8px}
+  .features{grid-template-columns:1fr}
+  .promo{padding:24px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">⚡ ZONA GAMER · DISEÑO DE DEMOSTRACIÓN · PRECIOS REFERENCIALES</div>
+
+<header>
+  <a class="logo" href="#">NEXORA<span> GAMING</span></a>
+  <nav>
+    <a href="#inicio">Inicio</a>
+    <a href="#productos">Productos</a>
+    <a href="#ventajas">Ventajas</a>
+  </nav>
+  <button class="cart-btn" id="openCart">🛒 Carrito (<span id="cartCount">0</span>)</button>
+</header>
+
+<main>
+<section class="hero" id="inicio">
+  <div>
+    <div class="eyebrow">TU SIGUIENTE NIVEL EMPIEZA AQUÍ</div>
+    <h1>SUBE DE NIVEL.<br><span>JUEGA MEJOR.</span></h1>
+    <p>
+      Descubre periféricos y componentes para construir tu setup ideal.
+      Encuentra tu próximo upgrade en NEXORA GAMING.
+    </p>
+    <div class="hero-actions">
+      <a class="primary" href="#productos">Explorar productos ↗</a>
+      <a class="secondary" href="#ventajas">Conocer la tienda</a>
+    </div>
+  </div>
+  <div class="hero-art">
+    <div class="orbit"><div class="gpu">🎮</div></div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat"><strong>PC GAMING</strong><small>Componentes y upgrades</small></div>
+  <div class="stat"><strong>RGB READY</strong><small>Tu setup, tu estilo</small></div>
+  <div class="stat"><strong>GG WP</strong><small>Juega a tu manera</small></div>
+</div>
+
+<section id="productos">
+  <div class="section-head">
+    <div>
+      <div class="eyebrow">EQUIPA TU SETUP</div>
+      <h2>Catálogo gamer</h2>
+      <p class="section-sub">Productos de ejemplo para esta tienda de demostración.</p>
+    </div>
+    <input class="search" id="search" type="search" placeholder="Buscar teclado, mouse, audífonos...">
+  </div>
+
+  <div class="categories" id="categories">
+    <button class="filter active" data-category="Todos">Todos</button>
+    <button class="filter" data-category="Periféricos">Periféricos</button>
+    <button class="filter" data-category="Audio">Audio</button>
+    <button class="filter" data-category="Componentes">Componentes</button>
+    <button class="filter" data-category="Accesorios">Accesorios</button>
+  </div>
+
+  <div class="products" id="products"></div>
+  <p class="note">Los nombres, precios e imágenes son ilustrativos; no representan stock real ni una oferta de venta confirmada.</p>
+</section>
+
+<section>
+  <div class="promo">
+    <div>
+      <div class="eyebrow">ARMA TU ESPACIO</div>
+      <h2>Tu setup. Tus reglas.</h2>
+      <p>Combina tus periféricos favoritos y crea un espacio que se sienta tuyo.</p>
+    </div>
+    <a class="primary" href="#productos">Ver catálogo →</a>
+  </div>
+</section>
+
+<section id="ventajas">
+  <div class="eyebrow">¿POR QUÉ NEXORA?</div>
+  <h2 style="margin-top:12px;margin-bottom:25px">Pensada para gamers</h2>
+  <div class="features">
+    <div class="feature"><b>🎯 Encuentra tu equipo</b><p>Explora categorías y busca productos desde un catálogo sencillo.</p></div>
+    <div class="feature"><b>🌌 Diseño inmersivo</b><p>Interfaz oscura, detalles neón y una experiencia adaptable a móviles.</p></div>
+    <div class="feature"><b>🛒 Carrito interactivo</b><p>Añade productos, cambia cantidades y revisa el total de tu selección.</p></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <a class="logo" href="#">NEXORA<span> GAMING</span></a>
+  <span>Proyecto web de demostración · 2026</span>
+  <a href="#inicio">Volver arriba ↑</a>
+</footer>
+
+<aside class="cart-panel" id="cartPanel" aria-label="Carrito de compras">
+  <div class="cart-head">
+    <h2>Tu carrito 🛒</h2>
+    <button class="close" id="closeCart">Cerrar ✕</button>
+  </div>
+  <div id="cartItems"></div>
+  <div class="cart-total">Total: <span id="cartTotal">S/ 0.00</span></div>
+  <button class="primary checkout" id="checkout">Finalizar demo</button>
+  <p class="note">Esta tienda es una demostración. No procesa pagos ni realiza pedidos reales.</p>
+</aside>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const products = [
+  {id:1,name:"Teclado mecánico RGB",category:"Periféricos",price:159,emoji:"⌨️",tag:"POPULAR",desc:"Teclas mecánicas y luces RGB."},
+  {id:2,name:"Mouse gamer Pro",category:"Periféricos",price:89,emoji:"🖱️",tag:"TOP",desc:"Diseño ligero para jugar."},
+  {id:3,name:"Audífonos gaming",category:"Audio",price:139,emoji:"🎧",tag:"GAMING",desc:"Audio envolvente y micrófono."},
+  {id:4,name:"Tarjeta gráfica demo",category:"Componentes",price:1299,emoji:"🎮",tag:"UPGRADE",desc:"Componente ilustrativo para PC."},
+  {id:5,name:"Memoria RAM RGB",category:"Componentes",price:229,emoji:"💾",tag:"RGB",desc:"Memoria para tu setup."},
+  {id:6,name:"Mando inalámbrico",category:"Accesorios",price:119,emoji:"🕹️",tag:"FAVORITO",desc:"Para jugar desde tu PC."},
+  {id:7,name:"Micrófono USB",category:"Audio",price:99,emoji:"🎙️",tag:"STREAM",desc:"Para chat, partidas y streams."},
+  {id:8,name:"Mousepad XL",category:"Accesorios",price:49,emoji:"🟪",tag:"SETUP",desc:"Superficie amplia para tu mouse."}
+];
+
+let activeCategory = "Todos";
+let cart = {};
+
+const money = value => "S/ " + value.toLocaleString("es-PE", {
+  minimumFractionDigits:2, maximumFractionDigits:2
+});
+
+function renderProducts(){
+  const query = document.getElementById("search").value.trim().toLowerCase();
+  const filtered = products.filter(p =>
+    (activeCategory === "Todos" || p.category === activeCategory) &&
+    (p.name.toLowerCase().includes(query) ||
+     p.category.toLowerCase().includes(query) ||
+     p.desc.toLowerCase().includes(query))
+  );
+
+  document.getElementById("products").innerHTML = filtered.length
+    ? filtered.map(p => `
+      <article class="product">
+        <div class="product-visual">
+          <span class="tag">${p.tag}</span>
+          <div class="product-emoji" aria-hidden="true">${p.emoji}</div>
+        </div>
+        <div class="product-info">
+          <div class="category-name">${p.category.toUpperCase()}</div>
+          <h3>${p.name}</h3>
+          <div class="description">${p.desc}</div>
+          <div class="price-row">
+            <span class="price">${money(p.price)}</span>
+            <button class="add" data-add="${p.id}">+ Añadir</button>
+          </div>
+        </div>
+      </article>
+    `).join("")
+    : '<p class="empty">No encontramos productos con esa búsqueda.</p>';
+}
+
+function renderCart(){
+  const entries = Object.entries(cart).filter(([,qty]) => qty > 0);
+  const count = entries.reduce((sum,[,qty]) => sum + qty,0);
+  const total = entries.reduce((sum,[id,qty]) => {
+    const product = products.find(p => p.id === Number(id));
+    return sum + product.price * qty;
+  },0);
+
+  document.getElementById("cartCount").textContent = count;
+  document.getElementById("cartTotal").textContent = money(total);
+  document.getElementById("cartItems").innerHTML = entries.length
+    ? entries.map(([id,qty]) => {
+      const p = products.find(item => item.id === Number(id));
+      return `<div class="cart-item">
+        <div><b>${p.emoji} ${p.name}</b><small>${money(p.price)} cada uno</small>
+        <div class="quantity">
+          <button data-change="${id}" data-delta="-1" aria-label="Quitar uno">−</button>
+          <span>${qty}</span>
+          <button data-change="${id}" data-delta="1" aria-label="Añadir uno">+</button>
+        </div></div>
+        <b>${money(p.price * qty)}</b>
+      </div>`;
+    }).join("")
+    : '<p class="empty">Tu carrito está vacío. ¡Explora el catálogo!</p>';
+}
+
+function notify(message){
+  const toast = document.getElementById("toast");
+  toast.textContent = message;
+  toast.style.display = "block";
+  clearTimeout(window.toastTimer);
+  window.toastTimer = setTimeout(() => toast.style.display = "none",2200);
+}
+
+document.getElementById("products").addEventListener("click",event => {
+  const button = event.target.closest("[data-add]");
+  if(!button) return;
+  const id = Number(button.dataset.add);
+  cart[id] = (cart[id] || 0) + 1;
+  renderCart();
+  notify("Producto añadido al carrito 🎮");
+});
+
+document.getElementById("cartItems").addEventListener("click",event => {
+  const button = event.target.closest("[data-change]");
+  if(!button) return;
+  const id = Number(button.dataset.change);
+  cart[id] = (cart[id] || 0) + Number(button.dataset.delta);
+  if(cart[id] <= 0) delete cart[id];
+  renderCart();
+});
+
+document.getElementById("categories").addEventListener("click",event => {
+  const button = event.target.closest("[data-category]");
+  if(!button) return;
+  activeCategory = button.dataset.category;
+  document.querySelectorAll(".filter").forEach(b =>
+    b.classList.toggle("active",b === button)
+  );
+  renderProducts();
+});
+
+document.getElementById("search").addEventListener("input",renderProducts);
+document.getElementById("openCart").addEventListener("click",() => {
+  document.getElementById("cartPanel").classList.add("open");
+});
+document.getElementById("closeCart").addEventListener("click",() => {
+  document.getElementById("cartPanel").classList.remove("open");
+});
+document.getElementById("checkout").addEventListener("click",() => {
+  notify("¡Demo completada! No se ha realizado ninguna compra.");
+});
+
+renderProducts();
+renderCart();
+</script>
+</body>
+</html>
